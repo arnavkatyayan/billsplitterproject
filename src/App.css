@@ -69,5 +69,56 @@
   gap:20px;
   padding:39px;
 }
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .main-class {
+    flex-direction: column;
+    gap: 10px;
+  }
 
+  .btn-grps {
+    grid-template-columns: repeat(3, 1fr); /* 2 columns for medium screens */
+    gap: 5px;
+  }
+
+  .output-class {
+    width: 80vw;
+    height: 40vh;
+    padding: 20px;
+  }
+
+  .column-gap {
+    margin-top: 10px;
+  }
+
+  .heading {
+    font-size: 25px; /* Adjust font size for smaller screens */
+    height: 10vh;
+  }
+}
+
+/* Small Screen (Phone Portrait Mode) */
+@media (max-width: 480px) {
+  .main-class {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .btn-grps {
+    grid-template-columns: repeat(3,1fr); /* Stack buttons on top of each other */
+    gap: 5px;
+  }
+
+  .output-class {
+    margin-top: 25px;
+    width: 90vw;
+    height: 40vh;
+    padding: 15px;
+  }
+
+  .heading {
+    font-size: 20px;
+    height: 8vh; /* Reduce height on small screens */
+  }
+}
 
