@@ -57,4 +57,17 @@
   grid-template-columns: repeat(3, 1fr); 
   gap: 10px; 
 }
+.column-gap {
+  margin-top: 15px;
+}
+.output-class {
+  height:40vh;
+  width:20vw;
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+  padding:39px;
+}
+
 
