@@ -29,6 +29,9 @@ function BillSplitter() {
         if (bill.trim().length) {
             setIsTipBtnDisabled(false);
         }
+        if(bill.trim().length === 0) {
+            setIsTipBtnDisabled(true);
+        }
     }, [bill]);
 
     const handleCustomTip = (evt) => {
