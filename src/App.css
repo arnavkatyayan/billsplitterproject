@@ -121,4 +121,12 @@
     height: 8vh; /* Reduce height on small screens */
   }
 }
+.bg-color {
+  color:red;
+}
+.selected-btn {
+  background-color: #4CAF50 !important; 
+  color: white !important; 
+  border: 2px solid black !important;
+}
 

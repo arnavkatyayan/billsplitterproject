@@ -13,6 +13,7 @@ function BillSplitter() {
     const [total, setTotal] = useState("");
     const [head, setHead] = useState("");
     const [tipBtnIdx, setTipBtnIdx] = useState(-1);
+    const [alphaSpotted, setAlphaSpotted] = useState(false);
     const tips = ["5%", "10%", "15%", "20%", "25%", "30%"];
 
     const handleBill = (evt) => {
@@ -26,11 +27,14 @@ function BillSplitter() {
     }, [customTip]);
 
     useEffect(() => {
-        if (bill.trim().length) {
-            setIsTipBtnDisabled(false);
+        const trimmedBill = bill.trim();
+        setIsTipBtnDisabled(trimmedBill.length === 0);
+    
+        if (/[a-zA-Z]/.test(trimmedBill) === true) {
+            setAlphaSpotted(true);
         }
-        if(bill.trim().length === 0) {
-            setIsTipBtnDisabled(true);
+        if (/[a-zA-Z]/.test(trimmedBill) === false) {
+            setAlphaSpotted(false);
         }
     }, [bill]);
 
@@ -78,15 +82,15 @@ function BillSplitter() {
 
     const getHead = (totalAmt) => {
         if (people === 0) {
-            setHead(totalAmt); // If no people, just show the total
+            setHead(totalAmt); 
         } else {
             const h1 = totalAmt / people;
-            setHead(h1); // Set the per-person amount
+            setHead(h1); 
         }
     }
 
     const handleSubmit = () => {
-        getTip(); // Calculate tip and update total
+        getTip();
     }
 
     return (
@@ -95,10 +99,11 @@ function BillSplitter() {
                 <Form>
                     <Form.Label>Bill</Form.Label>
                     <Form.Control type="text" placeholder="Enter the Bill" value={bill} onChange={handleBill}></Form.Control>
+                    {alphaSpotted ? <p className="bg-color">Only enter numbers</p> : null}
                     <Form.Label>Select Tip</Form.Label>
                     <div className="btn-grps">
                         {tips.map((tip, index) =>
-                            <Button key={index} disabled={isTipBtnDisabled} onClick={() => handleTipBtnIndex(index)}>{tip}</Button>
+                            <Button key={index} disabled={isTipBtnDisabled} className={index === tipBtnIdx ? "selected-btn" : ""} onClick={() => handleTipBtnIndex(index)}>{tip}</Button>
                         )}
                     </div>
                     <Form.Control type="text" placeholder="Enter custom tip" className="column-gap" disabled={isTipBtnDisabled} value={customTip} onChange={handleCustomTip} />
