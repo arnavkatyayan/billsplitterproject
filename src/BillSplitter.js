@@ -14,6 +14,8 @@ function BillSplitter() {
     const [head, setHead] = useState("");
     const [tipBtnIdx, setTipBtnIdx] = useState(-1);
     const [alphaSpotted, setAlphaSpotted] = useState(false);
+    const [alphaSpottedCustomTip, setAlphaSpottedCustomTip] = useState(false);
+    const [alphaSpottedPeople, setAlphaSpottedPeople] = useState(false);
     const tips = ["5%", "10%", "15%", "20%", "25%", "30%"];
 
     const handleBill = (evt) => {
@@ -24,7 +26,23 @@ function BillSplitter() {
         if (customTip.trim().length) {
             setIsCustomTip(true);
         }
+        if(/[a-zA-Z]/.test(customTip.trim())) {
+            setAlphaSpottedCustomTip(true);
+        }
+        if(/[a-zA-Z]/.test(customTip.trim) == false) {
+            setAlphaSpottedCustomTip(false);
+        }
     }, [customTip]);
+
+    useEffect(() => {
+        if (isNaN(people)) {
+            setAlphaSpottedPeople(true);
+        }
+        if(!isNaN(people)) {
+            setAlphaSpottedPeople(false);
+        }
+    }, [people]);
+    
 
     useEffect(() => {
         const trimmedBill = bill.trim();
@@ -107,8 +125,11 @@ function BillSplitter() {
                         )}
                     </div>
                     <Form.Control type="text" placeholder="Enter custom tip" className="column-gap" disabled={isTipBtnDisabled} value={customTip} onChange={handleCustomTip} />
+                    {alphaSpottedCustomTip ? <p className="bg-color">Only enter numbers</p> : null}
                     <Form.Label className="column-gap">Number Of People</Form.Label>
                     <Form.Control type="text" placeholder="No of people" value={people} onChange={handleNoOfPeople} disabled={isTipBtnDisabled}></Form.Control>
+                    {alphaSpottedPeople ? <p className="bg-color">Only enter numbers</p> : null}
+
                 </Form>
             </div>
             <div className="output-class">
